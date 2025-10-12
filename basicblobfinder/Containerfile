@@ -1,0 +1,14 @@
+FROM python:3-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+RUN git clone https://github.com/joswr1ght/basicblobfinder
+
+WORKDIR /app/basicblobfinder
+
+RUN pip install requests \
+    && chmod +x basicblobfinder.py
+
+ENV PYTHONWARNINGS=ignore::SyntaxWarning
+ENTRYPOINT ["python", "/app/basicblobfinder/basicblobfinder.py"]

@@ -1,0 +1,16 @@
+FROM python:2-alpine
+
+RUN apk add --no-cache git
+
+WORKDIR /app
+
+RUN git clone https://github.com/epinna/tplmap
+
+WORKDIR /app/tplmap
+
+RUN pip install -r requirements.txt \
+    && pip install requests \
+    && chmod +x tplmap.py
+
+ENTRYPOINT ["python", "/app/tplmap/tplmap.py"]
+CMD [ "-h" ]

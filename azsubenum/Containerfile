@@ -1,0 +1,15 @@
+FROM python:3-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+RUN git clone https://github.com/yuyudhn/AzSubEnum azsubenum
+
+WORKDIR /app/azsubenum
+
+RUN pip install -r requirements.txt \
+    && pip install requests \
+    && chmod +x azsubenum.py
+
+ENTRYPOINT ["python", "/app/azsubenum/azsubenum.py"]
+CMD ["--help"]

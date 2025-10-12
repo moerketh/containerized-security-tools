@@ -1,0 +1,8 @@
+FROM python:3-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+RUN pip install git+https://github.com/r0oth3x49/ghauri.git
+
+ENTRYPOINT ["python", "/usr/local/bin/ghauri"]

@@ -1,0 +1,11 @@
+FROM python:3.13-alpine AS builder
+
+RUN apk add --no-cache git gcc g++ musl-dev make rust cargo
+RUN pip install git+https://github.com/Pennyw0rth/NetExec
+
+FROM python:3.13-alpine
+
+COPY --from=builder /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
+COPY --from=builder /usr/local/bin/nxc /usr/local/bin/nxc
+
+ENTRYPOINT ["/usr/local/bin/nxc"]

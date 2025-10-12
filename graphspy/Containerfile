@@ -1,0 +1,9 @@
+FROM python:3-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache git
+RUN pip install git+https://github.com/RedByte1337/GraphSpy.git
+
+EXPOSE 5000
+ENTRYPOINT ["python", "/usr/local/bin/graphspy", "-i", "0.0.0.0"]
