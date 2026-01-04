@@ -1,0 +1,15 @@
+FROM python:3-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git gcc g++ make cmake && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/senzee1984/micr0_shell.git micr0_shell
+
+WORKDIR /app/micr0_shell
+RUN pip install keystone-engine \
+        && chmod +x "micr0 shell.py"
+
+ENTRYPOINT ["python", "/app/micr0_shell/micr0 shell.py"]
+CMD ["-h"]
